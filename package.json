@@ -1,0 +1,27 @@
+{
+  "name": "release-action",
+  "version": "1.0.0",
+  "description": "Adds a specific file to a specific GitHub Release (creating the Release if needed)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djnicholson/release-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djnicholson/release-action/issues"
+  },
+  "homepage": "https://github.com/djnicholson/release-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^3.0.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.3"
+  }
+}

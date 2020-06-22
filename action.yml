@@ -1,0 +1,26 @@
+name: 'Release file'
+description: 'Adds a specific file to a specific GitHub Release (creating the Release if needed)'
+inputs:
+  token:
+    description: 'GitHub auth token'
+    required: true
+  release-name:
+    description: 'Name of Release to add file to'
+    required: false
+    default: 'Rolling build'
+  tag-name:
+    description: 'Name of the tag for the release (will be associated with current branch)'
+    required: false
+    default: 'v0.0-rolling'
+  asset-name:
+    description: 'Name for the asset'
+    required: true
+  file:
+    description: 'File to release'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+branding:
+  icon: 'upload-cloud'
+  color: 'green'
