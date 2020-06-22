@@ -2862,19 +2862,29 @@ var fs_1 = __importDefault(__webpack_require__(747));
 var github = __importStar(__webpack_require__(469));
 function getRelease(octokit, tagName) {
     return __awaiter(this, void 0, void 0, function () {
-        var release;
+        var release, e_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     console.log("Retrieving release...");
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, octokit.repos.getReleaseByTag({
                             owner: github.context.repo.owner,
                             repo: github.context.repo.repo,
                             tag: tagName,
                         })];
-                case 1:
+                case 2:
                     release = _a.sent();
                     return [2 /*return*/, release.data];
+                case 3:
+                    e_1 = _a.sent();
+                    if ((e_1.message || "").toLowerCase().indexOf("not found") !== -1) {
+                        return [2 /*return*/, undefined];
+                    }
+                    throw e_1;
+                case 4: return [2 /*return*/];
             }
         });
     });
@@ -2972,6 +2982,9 @@ function main() {
                     return [4 /*yield*/, createRelease(octokit, tagName, releaseName)];
                 case 2:
                     release = _a.sent();
+                    if (!release) {
+                        throw new Error("Could not create new release");
+                    }
                     _a.label = 3;
                 case 3: return [4 /*yield*/, deleteExistingAsset(octokit, release.assets.find(function (_) { return _.name === assetName_1; }))];
                 case 4:
