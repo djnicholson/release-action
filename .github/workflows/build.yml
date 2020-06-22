@@ -1,0 +1,25 @@
+name: Build
+
+on: [ push ]
+
+jobs:
+  testaction:
+    runs-on: ubuntu-latest
+    name: Tests the action
+    steps:
+      - name: ⏳ Checkout
+        uses: actions/checkout@v2
+      - name: 💿 Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: 🚀 Build
+        run: |
+          npm ci
+          npm run build
+      - name: 🌎 Publish
+        uses: djnicholson/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          asset-name: 'index.js'
+          file: 'dist/index.js'
