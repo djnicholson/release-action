@@ -387,14 +387,6 @@ module.exports = windowsRelease;
 
 /***/ }),
 
-/***/ 52:
-/***/ (function(module) {
-
-module.exports = eval("require")("fs/promises");
-
-
-/***/ }),
-
 /***/ 87:
 /***/ (function(module) {
 
@@ -2866,7 +2858,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core = __importStar(__webpack_require__(470));
-var promises_1 = __importDefault(__webpack_require__(52));
+var fs_1 = __importDefault(__webpack_require__(747));
 var github = __importStar(__webpack_require__(469));
 function getRelease(octokit, tagName) {
     return __awaiter(this, void 0, void 0, function () {
@@ -2931,9 +2923,8 @@ function deleteExistingAsset(octokit, asset) {
 }
 function uploadNewAsset(octokit, release, file, assetName) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, _b, _c;
-        return __generator(this, function (_d) {
-            switch (_d.label) {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0:
                     console.log("Updating release description...");
                     return [4 /*yield*/, octokit.repos.updateRelease({
@@ -2944,21 +2935,17 @@ function uploadNewAsset(octokit, release, file, assetName) {
                             body: "Updated on " + new Date() + " by " + github.context.action + " (" + github.context.workflow + ")",
                         })];
                 case 1:
-                    _d.sent();
+                    _a.sent();
                     console.log("Uploading new asset...");
-                    _b = (_a = octokit.repos).uploadReleaseAsset;
-                    _c = {
-                        owner: github.context.repo.owner,
-                        repo: github.context.repo.repo,
-                        release_id: release.id
-                    };
-                    return [4 /*yield*/, promises_1.default.readFile(file)];
-                case 2: return [4 /*yield*/, (_d.sent()).toString()];
-                case 3: return [4 /*yield*/, _b.apply(_a, [(_c.data = _d.sent(),
-                            _c.name = assetName,
-                            _c)])];
-                case 4:
-                    _d.sent();
+                    return [4 /*yield*/, octokit.repos.uploadReleaseAsset({
+                            owner: github.context.repo.owner,
+                            repo: github.context.repo.repo,
+                            release_id: release.id,
+                            data: fs_1.default.readFileSync(file).toString(),
+                            name: assetName,
+                        })];
+                case 2:
+                    _a.sent();
                     return [2 /*return*/];
             }
         });

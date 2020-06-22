@@ -32,7 +32,7 @@ uses: djnicholson/release-action@v1
 with:
   token: ${{ secrets.GITHUB_TOKEN }}
   asset-name: 'my-app.dmg'
-  file: out/dist/my-app.dmg
+  file: 'out/dist/my-app.dmg'
 ```
 
 ```
@@ -42,5 +42,5 @@ with:
   release-name: 'Latest rolling build'
   tag-name: 'v1.3-alpha'
   asset-name: 'my-app.dmg'
-  file: out/dist/my-app.dmg
+  file: 'out/dist/my-app.dmg'
 ```

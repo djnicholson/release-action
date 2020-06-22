@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import fs from "fs/promises";
+import fs from "fs";
 import * as github from "@actions/github";
 import { GitHub } from "@actions/github/lib/utils";
 
@@ -68,7 +68,7 @@ async function uploadNewAsset(
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     release_id: release.id,
-    data: await (await fs.readFile(file)).toString(),
+    data: fs.readFileSync(file).toString(),
     name: assetName,
   });
 }

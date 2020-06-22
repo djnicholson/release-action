@@ -20,7 +20,8 @@ jobs:
           npm ci
           npm run build
       - name: 🌎 Publish
-        uses: djnicholson/release-action@v1
+        uses: ./
+        id: release-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           asset-name: 'index.js'
