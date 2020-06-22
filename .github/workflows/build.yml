@@ -19,10 +19,17 @@ jobs:
         run: |
           npm ci
           npm run build
-      - name: 🌎 Publish
+      - name: 🌎 Release (using local code)
         uses: ./
         id: release-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          asset-name: 'index.js'
+          file: 'dist/index.js'
+      - name: 🌎 Release (using published action)
+        uses: djnicholson/release-action@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-name: 'Rolling build (using published action)'
           asset-name: 'index.js'
           file: 'dist/index.js'
