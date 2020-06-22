@@ -7,7 +7,7 @@ on:
 jobs:
   testaction:
     runs-on: ubuntu-latest
-    name: Tests the action
+    name: Build TypeScript and publish to release
     steps:
       - name: ⏳ Checkout
         uses: actions/checkout@v2

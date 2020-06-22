@@ -8,12 +8,21 @@ async function getRelease(
   tagName: string
 ) {
   console.log("Retrieving release...");
-  const release = await octokit.repos.getReleaseByTag({
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-    tag: tagName,
-  });
-  return release.data;
+  try {
+    const release = await octokit.repos.getReleaseByTag({
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
+      tag: tagName,
+    });
+    return release.data;
+  } catch (e) {
+    if (
+      ((e.message as string) || "").toLowerCase().indexOf("not found") !== -1
+    ) {
+      return undefined;
+    }
+    throw e;
+  }
 }
 
 async function createRelease(
