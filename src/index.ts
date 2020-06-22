@@ -95,6 +95,9 @@ async function main() {
     let release = await getRelease(octokit, tagName);
     if (!release) {
       release = await createRelease(octokit, tagName, releaseName);
+      if (!release) {
+        throw new Error("Could not create new release");
+      }
     }
     await deleteExistingAsset(
       octokit,
