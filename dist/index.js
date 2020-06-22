@@ -2942,7 +2942,7 @@ function uploadNewAsset(octokit, release, file, assetName) {
                             repo: github.context.repo.repo,
                             release_id: release.id,
                             target_commitish: github.context.sha,
-                            body: "Updated on " + new Date() + " by " + github.context.action + " (" + github.context.workflow + ")",
+                            body: "Updated on " + new Date() + " by GitHub action: \"" + github.context.action + "\"",
                         })];
                 case 1:
                     _a.sent();
