@@ -19,7 +19,7 @@
   "homepage": "https://github.com/djnicholson/release-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.4",
-    "@actions/github": "^3.0.0"
+    "@actions/github": "^2.1.1"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3"

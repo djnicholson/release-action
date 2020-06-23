@@ -1,12 +1,8 @@
 import * as core from "@actions/core";
 import fs from "fs";
 import * as github from "@actions/github";
-import { GitHub } from "@actions/github/lib/utils";
 
-async function getRelease(
-  octokit: InstanceType<typeof GitHub>,
-  tagName: string
-) {
+async function getRelease(octokit: github.GitHub, tagName: string) {
   console.log("Retrieving release...");
   try {
     const release = await octokit.repos.getReleaseByTag({
@@ -26,12 +22,12 @@ async function getRelease(
 }
 
 async function createRelease(
-  octokit: InstanceType<typeof GitHub>,
+  octokit: github.GitHub,
   tagName: string,
   releaseName: string
 ) {
   console.log("Not found. Creating new release...");
-  const release = await octokit.repos.createRelease({
+  await octokit.repos.createRelease({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     tag_name: tagName,
@@ -43,7 +39,7 @@ async function createRelease(
 }
 
 async function deleteExistingAsset(
-  octokit: InstanceType<typeof GitHub>,
+  octokit: github.GitHub,
   asset: { id: number } | undefined
 ) {
   if (asset) {
@@ -57,7 +53,7 @@ async function deleteExistingAsset(
 }
 
 async function uploadNewAsset(
-  octokit: InstanceType<typeof GitHub>,
+  octokit: github.GitHub,
   release: { upload_url: string; id: number },
   file: string,
   assetName: string
@@ -73,18 +69,15 @@ async function uploadNewAsset(
     }"`,
   });
   console.log("Uploading new asset...");
-  const contentLength = (filePath: string) => fs.statSync(filePath).size;
   const headers = {
     "content-type": "application/octet-stream",
-    "content-length": contentLength(file),
+    "content-length": fs.statSync(file).size,
   };
   await octokit.repos.uploadReleaseAsset({
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-    release_id: release.id,
+    url: release.upload_url,
     name: assetName,
     headers,
-    data: fs.readFileSync(file).toString("binary"),
+    data: fs.readFileSync(file),
   });
 }
 
@@ -97,7 +90,7 @@ async function main() {
     const assetName = core.getInput("asset-name");
     const file = core.getInput("file");
 
-    const octokit = github.getOctokit(token);
+    const octokit = new github.GitHub(token);
     let release = await getRelease(octokit, tagName);
     if (!release) {
       release = await createRelease(octokit, tagName, releaseName);
