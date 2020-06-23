@@ -2933,6 +2933,7 @@ function deleteExistingAsset(octokit, asset) {
 }
 function uploadNewAsset(octokit, release, file, assetName) {
     return __awaiter(this, void 0, void 0, function () {
+        var contentLength, headers;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -2947,12 +2948,18 @@ function uploadNewAsset(octokit, release, file, assetName) {
                 case 1:
                     _a.sent();
                     console.log("Uploading new asset...");
+                    contentLength = function (filePath) { return fs_1.default.statSync(filePath).size; };
+                    headers = {
+                        "content-type": "application/octet-stream",
+                        "content-length": contentLength(file),
+                    };
                     return [4 /*yield*/, octokit.repos.uploadReleaseAsset({
                             owner: github.context.repo.owner,
                             repo: github.context.repo.repo,
                             release_id: release.id,
-                            data: fs_1.default.readFileSync(file).toString(),
                             name: assetName,
+                            headers: headers,
+                            data: fs_1.default.readFileSync(file).toString(),
                         })];
                 case 2:
                     _a.sent();
