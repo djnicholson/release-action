@@ -68,15 +68,23 @@ async function uploadNewAsset(
     repo: github.context.repo.repo,
     release_id: release.id,
     target_commitish: github.context.sha,
-    body: `Updated on ${new Date()} by GitHub action: "${github.context.action}"`,
+    body: `Updated on ${new Date()} by GitHub action: "${
+      github.context.action
+    }"`,
   });
   console.log("Uploading new asset...");
+  const contentLength = (filePath: string) => fs.statSync(filePath).size;
+  const headers = {
+    "content-type": "application/octet-stream",
+    "content-length": contentLength(file),
+  };
   await octokit.repos.uploadReleaseAsset({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     release_id: release.id,
-    data: fs.readFileSync(file).toString(),
     name: assetName,
+    headers,
+    data: fs.readFileSync(file).toString(),
   });
 }
 
