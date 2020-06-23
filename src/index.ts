@@ -84,7 +84,7 @@ async function uploadNewAsset(
     release_id: release.id,
     name: assetName,
     headers,
-    data: fs.readFileSync(file).toString(),
+    data: fs.readFileSync(file).toString("binary"),
   });
 }
 

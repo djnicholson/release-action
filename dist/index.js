@@ -2959,7 +2959,7 @@ function uploadNewAsset(octokit, release, file, assetName) {
                             release_id: release.id,
                             name: assetName,
                             headers: headers,
-                            data: fs_1.default.readFileSync(file).toString(),
+                            data: fs_1.default.readFileSync(file).toString("binary"),
                         })];
                 case 2:
                     _a.sent();
