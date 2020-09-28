@@ -69,9 +69,6 @@ async function uploadNewAsset(
     repo: github.context.repo.repo,
     release_id: release.id,
     target_commitish: github.context.sha,
-    body: `Updated on ${new Date()} by GitHub action: "${
-      github.context.action
-    }"`,
   });
   console.log("Uploading new asset...");
   const headers = {
