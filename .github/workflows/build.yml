@@ -44,16 +44,9 @@ jobs:
         run: |
           npm ci
           npm run build
-      # - name: 🌎 Release (using local code)
-      #   uses: ./
-      #   id: release-action
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     tag-name: 'v0.0-test'
-      #     asset-name: 'index.js'
-      #     file: 'dist/index.js'
-      - name: 🌎 Release
-        uses: djnicholson/release-action@v2.7
+      - name: 🌎 Release (using local code)
+        uses: ./
+        id: release-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag-name: 'v2.8'
