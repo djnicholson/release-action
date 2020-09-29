@@ -1,0 +1,27 @@
+name: BugTest
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  testaction:
+    runs-on: ubuntu-latest
+    name: Build TypeScript and publish to release
+    steps:
+      - name: ⏳ Checkout
+        uses: actions/checkout@v2
+      - name: 💿 Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: 🚀 Build
+        run: |
+          npm ci
+          npm run build
+      - name: 🌎 Release (using published action)
+        uses: djnicholson/release-action@v2.7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          asset-name: 'index.js'
+          file: 'dist/index.js'
