@@ -28,10 +28,10 @@ jobs:
           asset-name: 'index.js'
           file: 'dist/index.js'
       - name: 🌎 Release (using published action)
-        uses: djnicholson/release-action@v2
+        uses: djnicholson/release-action@v2.7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag-name: 'v2.0-rolling'
-          release-name: 'Rolling build (using published action)'
+          tag-name: 'v2.8-candidate'
+          release-name: 'Rolling build'
           asset-name: 'index.js'
           file: 'dist/index.js'
