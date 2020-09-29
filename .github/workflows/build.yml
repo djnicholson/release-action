@@ -4,23 +4,22 @@
 # 1. Build a feature
 #    Develop new feature and merge code into the master branch
 #    of https://github.com/djnicholson/release-action.
-# 3. Determine what the next version tag is going to be 
-#    The current value of the "tag-name" setting (found lower 
-#    down in this file will be used).
-# 2. Edit README.md 
-#    Change the two examples to use the next version tag.
-# 3. Commit and push to GitHub
+# 2. Commit and push to GitHub
 #    Wait for the Action to succeed (monitor this at 
 #    https://github.com/djnicholson/release-action/actions)
-# 4. Publish to the market place
+# 3. Publish to the market place
 #    Go to: 
 #    https://github.com/djnicholson/release-action/releases
 #    Edit the "Upcoming release" (check the "Publish to GitHub
 #    Marketplace" box and give it a meaningful title and
 #    description).
-# 5. Decide what the next version number will be
-#    Update the "tag-name" setting lower in this file (increment
-#    the value) then commit and merge into master.
+# 4. Decide what the next version number will be then make these
+#    updates:
+#    a. Update the "tag-name" setting lower in this file
+#    b. Update the "release-name" setting lower in this file
+#    c. Update README.md and change the two examples to use the 
+#       next tag value.
+#    Commit push and merge to master
 #
 
 name: Build
@@ -49,7 +48,7 @@ jobs:
         id: release-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag-name: 'v2.8'
-          release-name: 'Upcoming release'
+          tag-name: 'v2.9'
+          release-name: 'v2.9 [Upcoming release]'
           asset-name: 'index.js'
           file: 'dist/index.js'
