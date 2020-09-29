@@ -28,6 +28,9 @@ name: Build
 on:
   push:
     branches: [ master ]
+# TODO: Don't update release on PR
+  pull_request:
+    branches: [ master ]
 
 jobs:
   testaction:
