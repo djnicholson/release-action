@@ -19,7 +19,7 @@ jobs:
         run: |
           npm ci
           npm run build
-      - name: 🌎 Release (using published action)
+      - name: 🌎 Release
         uses: djnicholson/release-action@v2.7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

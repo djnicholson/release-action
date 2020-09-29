@@ -52,7 +52,7 @@ jobs:
       #     tag-name: 'v0.0-test'
       #     asset-name: 'index.js'
       #     file: 'dist/index.js'
-      - name: 🌎 Release (using published action)
+      - name: 🌎 Release
         uses: djnicholson/release-action@v2.7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
