@@ -26,12 +26,11 @@ async function createRelease(
   tagName: string,
   releaseName: string
 ) {
-  console.log(
-    "Not found. Creating new release...",
+  console.log("Not found. Creating new release...", {
     tagName,
     releaseName,
-    github.context.ref
-  );
+    ref: github.context.ref,
+  });
   await octokit.repos.createRelease({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
