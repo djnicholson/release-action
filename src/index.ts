@@ -91,6 +91,11 @@ async function main() {
     const assetName = core.getInput("asset-name");
     const file = core.getInput("file");
 
+    if (github.context.ref.startsWith("refs/pull")) {
+      console.log("::warning::Skipping action as this is a pull request");
+      return;
+    }
+
     const octokit = new github.GitHub(token);
     let release = await getRelease(octokit, tagName);
     if (!release) {
