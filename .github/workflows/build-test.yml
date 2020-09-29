@@ -1,4 +1,4 @@
-name: BugTest
+name: BuildTest
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 jobs:
   testaction:
     runs-on: ubuntu-latest
-    name: Build TypeScript and publish to release
+    name: Check that code builds
     steps:
       - name: ⏳ Checkout
         uses: actions/checkout@v2
@@ -19,10 +19,4 @@ jobs:
         run: |
           npm ci
           npm run build
-      - name: 🌎 Release
-        uses: ./
-        id: release-action
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          asset-name: 'index.js'
-          file: 'dist/index.js'
+

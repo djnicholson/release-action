@@ -2,6 +2,8 @@ import * as core from "@actions/core";
 import fs from "fs";
 import * as github from "@actions/github";
 
+// This is just a comment.
+
 async function getRelease(octokit: github.GitHub, tagName: string) {
   console.log("Retrieving release...");
   try {

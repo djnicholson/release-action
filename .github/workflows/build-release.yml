@@ -22,7 +22,7 @@
 #    Commit push and merge to master
 #
 
-name: Build
+name: BuildRelease
 
 on:
   push:
