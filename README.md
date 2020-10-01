@@ -28,7 +28,7 @@ The name to use to tag the Release (defaults to "v0.0-rolling")
 ## Example usage
 
 ```
-uses: djnicholson/release-action@v2.9
+uses: djnicholson/release-action@v2.10
 with:
   token: ${{ secrets.GITHUB_TOKEN }}
   asset-name: 'my-app.dmg'
@@ -36,7 +36,7 @@ with:
 ```
 
 ```
-uses: djnicholson/release-action@v2.9
+uses: djnicholson/release-action@v2.10
 with:
   token: ${{ secrets.GITHUB_TOKEN }}
   release-name: 'Latest rolling build'
