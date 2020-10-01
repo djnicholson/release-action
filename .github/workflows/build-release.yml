@@ -48,7 +48,7 @@ jobs:
         id: release-action
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag-name: 'v2.9'
-          release-name: 'v2.9 [Upcoming release]'
+          tag-name: 'v2.10'
+          release-name: 'v2.10 [Upcoming release]'
           asset-name: 'index.js'
           file: 'dist/index.js'
