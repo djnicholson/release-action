@@ -24,11 +24,10 @@ The name to use to tag the Release (defaults to "v0.0-rolling")
 
 **Required** The full path to the file to be added as an asset to the Release.
 
-
 ## Example usage
 
 ```
-uses: djnicholson/release-action@v2.10
+uses: djnicholson/release-action@v2.11
 with:
   token: ${{ secrets.GITHUB_TOKEN }}
   asset-name: 'my-app.dmg'
@@ -36,7 +35,7 @@ with:
 ```
 
 ```
-uses: djnicholson/release-action@v2.10
+uses: djnicholson/release-action@v2.11
 with:
   token: ${{ secrets.GITHUB_TOKEN }}
   release-name: 'Latest rolling build'
