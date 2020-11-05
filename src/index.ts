@@ -62,7 +62,8 @@ async function uploadNewAsset(
   octokit: github.GitHub,
   release: { upload_url: string; id: number },
   file: string,
-  assetName: string
+  assetName: string,
+  tagName: string
 ) {
   console.log("Updating release description...");
   await octokit.repos.updateRelease({
@@ -70,6 +71,7 @@ async function uploadNewAsset(
     repo: github.context.repo.repo,
     release_id: release.id,
     target_commitish: github.context.sha,
+    tag_name: tagName,
   });
   console.log("Uploading new asset...");
   const headers = {
@@ -110,7 +112,7 @@ async function main() {
       octokit,
       release.assets.find((_) => _.name === assetName)
     );
-    await uploadNewAsset(octokit, release, file, assetName);
+    await uploadNewAsset(octokit, release, file, assetName, tagName);
   } catch (error) {
     core.setFailed(error.message);
   }
